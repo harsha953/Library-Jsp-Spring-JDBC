@@ -1,1 +1,1 @@
-# Library application(Jsp-Spring-JDBC)
+# Library application(Jsp-Spring-JDBC-Mysql)
