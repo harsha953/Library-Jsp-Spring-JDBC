@@ -28,16 +28,18 @@ public class BookDAO extends BaseDAO<Book> implements ResultSetExtractor<List<Bo
 
 	public int saveAndGetId(Book be) throws SQLException{
 		final String query = "insert into tbl_book(title, pubId) values(?,?)";
+		final String title = be.getTitle();
+		final Publisher publisher = be.getPublisher();
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		template.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement ps = con.prepareStatement(query, new String[] { "bookId" });
-				ps.setString(1, be.getTitle());
-				if (be.getPublisher()==null) {
+				ps.setString(1, title);
+				if (publisher==null) {
 					ps.setNull(2, java.sql.Types.INTEGER);
 				}else{
-				ps.setInt(2, be.getPublisher().getPublisherId());
+				ps.setInt(2, publisher.getPublisherId());
 				}
 				return ps;
 			}

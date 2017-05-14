@@ -23,11 +23,16 @@ import com.gcit.library.service.Librarian;
 @Configuration
 public class LibraryConfig {
 	private static final String driver = "com.mysql.jdbc.Driver";
+	// Local db connection
 	private static final String url = "jdbc:mysql://127.0.0.1:3306/library";
 	private static final String user = "root";
 	private static final String pwd = "mysql";
-
-	@Bean
+	// Online DB Server connection
+/*	private static final String url = "jdbc:mysql://sql9.freemysqlhosting.net/sql9173390";
+	private static final String user = "sql9173390";
+	private static final String pwd = "vFXIBg7cVf";
+*/
+	@Bean(name = "dataSource")
 	public BasicDataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(driver);

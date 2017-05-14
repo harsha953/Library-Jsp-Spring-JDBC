@@ -23,12 +23,13 @@ public class AuthorDAO extends BaseDAO<Author> implements ResultSetExtractor<Lis
 
 	public Integer saveAndGetId(Author be) throws SQLException {
 		final String query = "insert into tbl_author(authorName) values(?)";
+		final String authorName = be.getAuthorName();
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		template.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement ps = con.prepareStatement(query, new String[] { "authorId" });
-				ps.setString(1, be.getAuthorName());
+				ps.setString(1, authorName);
 				return ps;
 			}
 		}, keyHolder);
